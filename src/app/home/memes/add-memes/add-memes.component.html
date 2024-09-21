@@ -1,0 +1,18 @@
+<div class="container">
+    <h2>Ajouter un Mème</h2>
+    <form (ngSubmit)="addMeme()">
+        <div class="form-group">
+            <label for="name">Titre :</label>
+            <input type="text" id="name" [(ngModel)]="name" name="name" required class="form-control" />
+        </div>
+        <div class="form-group">
+            <label for="image">Image :</label>
+            <input type="file" id="image" (change)="onFileChange($event)" accept="image/*" required
+                class="form-control" />
+        </div>
+        <button type="submit" class="btn btn-primary">Ajouter Mème</button>
+    </form>
+    <div *ngIf="message" class="alert alert-info mt-3">
+        {{ message }}
+    </div>
+</div>

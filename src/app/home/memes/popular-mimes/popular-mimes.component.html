@@ -1,0 +1,10 @@
+<div *ngIf="memes && memes.length > 0; else noMemes" class="les_memes">
+    <div *ngFor="let meme of memes" class="package" (click)="selectedMemes(meme.image_url)">
+        <div class="package2">
+            <img [src]="'http://127.0.0.1:8000'+meme.image_url" alt="{{ meme.name }}" class="meme-image" />
+        </div>
+    </div>
+</div>
+<ng-template #noMemes>
+    <p>Aucun mème trouvé.</p>
+</ng-template>

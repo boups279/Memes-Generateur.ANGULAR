@@ -1,0 +1,25 @@
+<!-- register.component.html -->
+<form (ngSubmit)="onSubmit()" #registerForm="ngForm">
+    <div>
+      <label for="prenom">Prenom</label>
+      <input type="text" id="prenom" required [(ngModel)]="model.prenom" name="prenom" />
+    </div>
+    <div>
+        <label for="nom">Nom</label>
+        <input type="text" id="nom" required [(ngModel)]="model.nom" name="nom" />
+      </div>
+    <div>
+      <label for="email">Email</label>
+      <input type="email" id="email" required [(ngModel)]="model.email" name="email" />
+    </div>
+    <div>
+      <label for="password">Mot de passe</label>
+      <input type="password" id="password" required [(ngModel)]="model.password" name="password" />
+    </div>
+    <div>
+      <label for="confirmPassword">Confirmer le mot de passe</label>
+      <input type="password" id="confirmPassword" required [(ngModel)]="model.confirmPassword" name="confirmPassword" />
+    </div>
+    <button type="submit">S'inscrire</button>
+  </form>
+  

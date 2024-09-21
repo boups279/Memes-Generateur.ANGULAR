@@ -1,0 +1,112 @@
+<div class="row justify-content-center p-5">
+    <div class="card col-md-12 mb-3" style="max-width: 940px;">
+        <div class="row g-0">
+            <div class="col-md-4">
+                <app-img-memes></app-img-memes>
+            <!-- <img class=" meme_image rounded-start" [src]="'http://127.0.0.1:8000'+this.authService.selected_memes" alt="memes" /> -->
+            </div>
+            <div class="col-md-8">
+                <div class="card-body">
+                    <!-- <h5 class="card-title">Card title</h5> -->
+
+
+                    <div class="d-flex add_image">
+                        <button class="btn btn-outline-success" data-bs-target="#exampleModalToggle"
+                            data-bs-toggle="modal">Telecharger un nouveau modèle</button>
+
+                        <div class="ms-5">
+                            <form class="d-flex" role="search">
+                                <input class="form-control me-2" type="search" placeholder="Rechercher tous les mèmes"
+                                    aria-label="Search">
+                            </form>
+                        </div>
+                    </div>
+                    <div class="d-flex justify-content-end">
+                        <form [formGroup]="radioForm">
+                            <div class="radio-inputs">
+                                <label class="radio">
+                                    <input type="radio" formControlName="option" value="mon">
+                                    <span class="name">Mon</span>
+                                </label>
+                                <label class="radio">
+                                    <input type="radio" formControlName="option" value="populaire">
+                                    <span class="name">Populaire</span>
+                                </label>
+                            </div>
+                        </form>
+
+
+                        <!-- <div class="radio-inputs">
+                            <label class="radio">
+                                <input type="radio" name="radio" checked="">
+                                <span class="name">Mon</span>
+                            </label>
+                            <label class="radio">
+                                <input type="radio" name="radio">
+                                <span class="name">Populaire</span>
+                            </label>
+                        </div> -->
+                    </div>
+
+
+                    <!-- Les Cardes des Memes -->
+                    <div class="les_cardes">
+                        <div  *ngIf="selectedOption === 'populaire'">
+                            <app-popular-mimes></app-popular-mimes>
+                        </div>
+                        <div *ngIf="selectedOption === 'mon'">
+                            <app-mon-memes></app-mon-memes>
+                        </div>
+                    </div>
+
+                    <form class="mt-4">
+                        <div class="mb-3 d-flex">
+                            <div class="col-10">
+                                <input type="email" placeholder="Texte" class="form-control" id="exampleInputEmail1"
+                                    aria-describedby="emailHelp">
+                            </div>
+                            <div class="col-2 ms-2">
+                                <button class="btn btn-outline-success" type="submit">+</button>
+                            </div>
+                        </div>
+                    </form>
+                    <button type="submit" class="btn btn-primary" data-bs-toggle="modal"
+                        data-bs-target="#staticBackdrop">Gènèrer le meme</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="exampleModalToggle" aria-hidden="true" aria-labelledby="exampleModalToggleLabel"
+    tabindex="-1">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="exampleModalToggleLabel">Ajouter un image</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <app-add-memes></app-add-memes>
+                <!-- <form>
+                    <div class="mb-3">
+                      <label for="recipient-name" class="col-form-label">IMG:</label>
+                      <input type="file" class="form-control" id="recipient-name">
+                    </div>
+                    <div class="mb-3">
+                      <label for="recipient-name" class="col-form-label">URL:</label>
+                      <input type="text" class="form-control" id="recipient-name">
+                    </div>
+                   
+                  </form>
+                  <div class="d-flex justify-content-center">
+                      <button class="btn btn-outline-success" data-bs-target="#exampleModalToggle" data-bs-toggle="modal">Uploder</button>
+                  </div> -->
+
+            </div>
+            <div class="modal-footer">
+                <!-- <button class="btn btn-primary" data-bs-target="#exampleModalToggle2" data-bs-toggle="modal">Open second modal</button> -->
+            </div>
+        </div>
+    </div>
+</div>
