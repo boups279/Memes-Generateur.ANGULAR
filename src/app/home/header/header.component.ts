@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { AddMemesComponent } from '../memes/add-memes/add-memes.component';
 import { PopularMimesComponent } from '../memes/popular-mimes/popular-mimes.component';
@@ -14,6 +14,8 @@ import { CommonModule } from '@angular/common';
 import { AuthService } from '../../services/auth.service';
 import { ImgMemesComponent } from '../memes/img-memes/img-memes.component';
 import { GenererComponent } from '../memes/generer/generer.component';
+import html2canvas from 'html2canvas';
+
 
 @Component({
   selector: 'app-header',
@@ -35,6 +37,9 @@ export class HeaderComponent {
   radioForm!: FormGroup;
   selectedOption: any;
   form: FormGroup;
+
+  @ViewChild('elementToCapturerecto') elementToCapturerecto: any;
+  @ViewChild('elementToCaptureverso') elementToCaptureverso: any;
 
   constructor(private fb: FormBuilder, public authService: AuthService) {
     // this.form = this.fb.group({
@@ -135,6 +140,35 @@ export class HeaderComponent {
 
   resetTransform() {
     this.authService.textTransform = 'none';
+  }
+
+
+
+
+
+
+  takeScreenshot() {
+    const element = this.elementToCapturerecto.nativeElement;
+    html2canvas(element).then((canvas: any) => {
+      const screenshot = canvas.toDataURL('image/png');
+      const a = document.createElement('a');
+      a.href = screenshot;
+      a.download = 'this.content.prenom' + '_qrcode.png';
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+    });
+
+    const element2 = this.elementToCaptureverso.nativeElement;
+    html2canvas(element2).then((canvas: any) => {
+      const screenshot = canvas.toDataURL('image/png');
+      const a = document.createElement('a');
+      a.href = screenshot;
+      a.download = 'this.content.prenom' + '_qrcode.png';
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+    });
   }
 
 }

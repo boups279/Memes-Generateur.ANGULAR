@@ -1,10 +1,29 @@
+<div>
+    <h1>hello</h1>
+    <img #elementToCapturerecto class="" [src]="this.authService.selected_memes"
+                            alt="memes"  />
+
+</div>
+                        <button (click)="takeScreenshot()">Prendre une capture d'écran</button>
+
+
 <div class="row justify-content-center p-5">
-    <div class="card col-md-12 mb-3" style="max-width: 940px;">
+    <div class="card col-md-12 mb-3" style="max-width: 1340px;">
         <div class="row g-0">
-            <div class="col-md-4">
-                <app-img-memes></app-img-memes>
+            <div class="col-md-6">
+                <!-- <app-img-memes></app-img-memes> -->
+                <div class="example-boundary">
+                    <
+                    <div class="example-box" cdkDragBoundary=".example-boundary" cdkDrag>
+                       <p [ngStyle]="{'font-style': authService.isItalic ? 'italic' : 'normal', 
+                       'font-weight': authService.isBold ? 'bold' : 'normal', 
+                       'color': authService.textColor, 
+                       'font-size': authService.fontSize + 'px'}">{{this.authService.le_texte}}</p>
+                    </div>
+                </div>
+                
             </div>
-            <div class="col-md-8">
+            <div class="col-md-6">
                 <div class="card-body">
                     <!-- <h5 class="card-title">Card title</h5> -->
 
@@ -196,26 +215,11 @@
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
             <div class="modal-header">
-                <h1 class="modal-title fs-5" id="exampleModalToggleLabel">Ajouter un image</h1>
+                <h1 class="modal-title fs-5" id="exampleModalToggleLabel">Ajouter un Mème</h1>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
                 <app-add-memes></app-add-memes>
-                <!-- <form>
-                    <div class="mb-3">
-                      <label for="recipient-name" class="col-form-label">IMG:</label>
-                      <input type="file" class="form-control" id="recipient-name">
-                    </div>
-                    <div class="mb-3">
-                      <label for="recipient-name" class="col-form-label">URL:</label>
-                      <input type="text" class="form-control" id="recipient-name">
-                    </div>
-                   
-                  </form>
-                  <div class="d-flex justify-content-center">
-                      <button class="btn btn-outline-success" data-bs-target="#exampleModalToggle" data-bs-toggle="modal">Uploder</button>
-                  </div> -->
-
             </div>
             <div class="modal-footer">
                 <!-- <button class="btn btn-primary" data-bs-target="#exampleModalToggle2" data-bs-toggle="modal">Open second modal</button> -->

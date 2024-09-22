@@ -1,6 +1,13 @@
-<div class="dive-screen" #screenshotDiv>
+<!-- <div class="dive-screen" #screenshotDiv>
     <h1>Bienvenue dans le monde immersif !</h1>
     <p>Explorez les fonctionnalités incroyables de notre application.</p>
     <button (click)="takeScreenshot()">Prendre un screenshot</button>
+  </div>
+   -->
+
+
+   <div *ngIf="screenshot">
+    <img class="meme_image" [src]="screenshot" alt="Captured Screenshot" />
+    <button (click)="downloadScreenshot()">Télécharger la capture</button>
   </div>
   

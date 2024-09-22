@@ -29,7 +29,7 @@ export class PopularMimesComponent {
   }
 
   selectedMemes(meme: any){
-    this.authService.selected_memes = meme;
+    this.authService.selected_memes = 'http://127.0.0.1:8000'+meme;
     console.log('selected_memes',meme);
   }
 

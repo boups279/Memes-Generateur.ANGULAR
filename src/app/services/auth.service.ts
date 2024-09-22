@@ -1,12 +1,17 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { catchError, Observable, throwError } from 'rxjs';
+import { BehaviorSubject, catchError, Observable, throwError } from 'rxjs';
 // import { JwtHelperService } from '@auth0/angular-jwt';
 
 @Injectable({
   providedIn: 'root',
 })
 export class AuthService {
+
+  private screenshotSubject = new BehaviorSubject<string | null>(null);
+  screenshot$ = this.screenshotSubject.asObservable();
+
+
   private apiUrl = 'http://127.0.0.1:8000/api/auth';
   switch_memes = 'mon';
   selected_memes = '';
@@ -17,6 +22,7 @@ export class AuthService {
   textColor = '#000000';
   fontSize = 16;
   textTransform: string = 'none';
+
 
   constructor(private http: HttpClient) {}
 
@@ -32,15 +38,6 @@ export class AuthService {
   }): Observable<any> {
     return this.http.post(`${this.apiUrl}/register`, credentials);
   }
-
-  // Ajouter un mème
-  // addMeme(meme: { name: string; image: File }): Observable<any> {
-  //   const formData = new FormData();
-  //   formData.append('name', meme.name);
-  //   formData.append('image', meme.image, meme.image.name);
-
-  //   return this.http.post(`${this.apiUrl}/memes`, formData); // Point de terminaison pour ajouter un mème
-  // }
 
   addMeme(meme: { name: string; image: File }): Observable<any> {
     const formData = new FormData();
@@ -73,13 +70,7 @@ export class AuthService {
     return localStorage.getItem('access_token');
   }
 
-  // getDecodedToken(): any {
-  //   const token = this.getToken();
-  //   if (token) {
-  //     return this.jwtHelper.decodeToken(token);
-  //   }
-  //   return null;
-  // }
+
 
   logout(): void {
     localStorage.removeItem('access_token');
@@ -87,5 +78,17 @@ export class AuthService {
 
   isAuthenticated(): boolean {
     return !!this.getToken();
+  }
+
+
+
+  // Enregistre l'image capturée
+  setScreenshot(image: string): void {
+    this.screenshotSubject.next(image);
+  }
+
+  // Efface l'image
+  clearScreenshot(): void {
+    this.screenshotSubject.next(null);
   }
 }
