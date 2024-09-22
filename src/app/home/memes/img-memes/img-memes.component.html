@@ -1,6 +1,7 @@
-<!-- <div class="example-boundary" #elementToCapturerecto>
+<div class="example-boundary" #captureDiv>
     <img class=" meme_image rounded-start" [src]="this.authService.selected_memes"
         alt="memes"  />
+    <!-- <img class=" meme_image rounded-start" src="memes3.png" alt="memes"  /> -->
     <div class="example-box" cdkDragBoundary=".example-boundary" cdkDrag>
        <p [ngStyle]="{'font-style': authService.isItalic ? 'italic' : 'normal', 
        'font-weight': authService.isBold ? 'bold' : 'normal', 
@@ -8,7 +9,7 @@
        'font-size': authService.fontSize + 'px'}">{{this.authService.le_texte}}</p>
     </div>
 </div>
-<button (click)="takeScreenshot()">Prendre une capture d'écran</button> -->
+<button (click)="capture()">Prendre une capture d'écran v3</button>
 
 
 

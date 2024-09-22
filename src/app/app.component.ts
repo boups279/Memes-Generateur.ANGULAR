@@ -8,6 +8,7 @@ import { LoginComponent } from './public/login/login.component';
 import { HomeComponent } from './home/home.component';
 import { RegisterComponent } from './public/register/register.component';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
+import html2canvas from 'html2canvas';
 
 @Component({
   selector: 'app-root',
@@ -26,5 +27,5 @@ import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
   styleUrl: './app.component.scss'
 })
 export class AppComponent {
-  title = 'Memes-Generateur';
+  title = 'Memes-Generateur';  
 }

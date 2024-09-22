@@ -1,26 +1,10 @@
-<div>
-    <h1>hello</h1>
-    <img #elementToCapturerecto class="" [src]="this.authService.selected_memes"
-                            alt="memes"  />
-
-</div>
-                        <button (click)="takeScreenshot()">Prendre une capture d'écran</button>
-
 
 <div class="row justify-content-center p-5">
     <div class="card col-md-12 mb-3" style="max-width: 1340px;">
         <div class="row g-0">
             <div class="col-md-6">
-                <!-- <app-img-memes></app-img-memes> -->
-                <div class="example-boundary">
-                    <
-                    <div class="example-box" cdkDragBoundary=".example-boundary" cdkDrag>
-                       <p [ngStyle]="{'font-style': authService.isItalic ? 'italic' : 'normal', 
-                       'font-weight': authService.isBold ? 'bold' : 'normal', 
-                       'color': authService.textColor, 
-                       'font-size': authService.fontSize + 'px'}">{{this.authService.le_texte}}</p>
-                    </div>
-                </div>
+                <app-img-memes></app-img-memes>
+             
                 
             </div>
             <div class="col-md-6">
