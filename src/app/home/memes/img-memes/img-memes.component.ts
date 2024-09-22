@@ -16,54 +16,54 @@ import { FormArray, FormBuilder, FormGroup, FormsModule, ReactiveFormsModule } f
   styleUrls: ['./img-memes.component.scss']
 })
 export class ImgMemesComponent {
-  isItalic = false;
-  isBold = false;
-  textColor = '#000000'; // Couleur par défaut en hexadécimal
-  fontSize = 16; // Taille de police par défaut
+  // isItalic = false;
+  // isBold = false;
+  // textColor = '#000000';
+  // fontSize = 16;
 
-  form: FormGroup;
+  // form: FormGroup;
 
   constructor(private fb: FormBuilder,public  authService: AuthService) {
-    this.form = this.fb.group({
-      inputs: this.fb.array([])
-    });
+    // this.form = this.fb.group({
+    //   inputs: this.fb.array([])
+    // });
   }
 
-  get inputs(): FormArray {
-    return this.form.get('inputs') as FormArray;
-  }
+  // get inputs(): FormArray {
+  //   return this.form.get('inputs') as FormArray;
+  // }
 
-  addInput() {
-    const inputGroup = this.fb.group({
-      value: ['']
-    });
-    this.inputs.push(inputGroup);
-  }
+  // addInput() {
+  //   const inputGroup = this.fb.group({
+  //     value: ['']
+  //   });
+  //   this.inputs.push(inputGroup);
+  // }
 
-  removeInput(index: number) {
-    this.inputs.removeAt(index);
-  }
+  // removeInput(index: number) {
+  //   this.inputs.removeAt(index);
+  // }
 
-  toggleItalic() {
-    this.isItalic = !this.isItalic;
-  }
+  // toggleItalic() {
+  //   this.isItalic = !this.isItalic;
+  // }
 
-  toggleBold() {
-    this.isBold = !this.isBold;
-  }
+  // toggleBold() {
+  //   this.isBold = !this.isBold;
+  // }
 
-  increaseFontSize() {
-    this.fontSize += 2; // Augmente la taille de police de 2px
-  }
+  // increaseFontSize() {
+  //   this.fontSize += 2; // Augmente la taille de police de 2px
+  // }
 
-  decreaseFontSize() {
-    if (this.fontSize > 8) { // Évite que la taille de police ne soit trop petite
-      this.fontSize -= 2; // Diminue la taille de police de 2px
-    }
-  }
+  // decreaseFontSize() {
+  //   if (this.fontSize > 8) { // Évite que la taille de police ne soit trop petite
+  //     this.fontSize -= 2; // Diminue la taille de police de 2px
+  //   }
+  // }
 
-  onColorChange(event: Event) {
-    const input = event.target as HTMLInputElement;
-    this.textColor = input.value; // Met à jour la couleur du texte
-  }
+  // onColorChange(event: Event) {
+  //   const input = event.target as HTMLInputElement;
+  //   this.textColor = input.value; // Met à jour la couleur du texte
+  // }
 }

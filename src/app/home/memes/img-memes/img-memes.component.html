@@ -2,24 +2,24 @@
     <img class=" meme_image rounded-start" [src]="'http://127.0.0.1:8000'+this.authService.selected_memes"
         alt="memes" />
     <div class="example-box" cdkDragBoundary=".example-boundary" cdkDrag>
-       <p [ngStyle]="{'font-style': isItalic ? 'italic' : 'normal', 
-       'font-weight': isBold ? 'bold' : 'normal', 
-       'color': textColor, 
-       'font-size': fontSize + 'px'}">je suis plus fort</p>
+       <p [ngStyle]="{'font-style': authService.isItalic ? 'italic' : 'normal', 
+       'font-weight': authService.isBold ? 'bold' : 'normal', 
+       'color': authService.textColor, 
+       'font-size': authService.fontSize + 'px'}">{{this.authService.le_texte}}</p>
     </div>
 </div>
 
-<button (click)="toggleItalic()">Italique</button>
+<!-- <button (click)="toggleItalic()">Italique</button>
 <button (click)="toggleBold()">Gras</button>
 <button (click)="increaseFontSize()">Augmenter taille</button>
 <button (click)="decreaseFontSize()">Diminuer taille</button>
 <div>
     <h4>Sélectionnez une couleur :</h4>
     <input type="color" [(ngModel)]="textColor" (input)="onColorChange($event)">
-  </div>
+  </div> -->
 
 
-  <form [formGroup]="form">
+  <!-- <form [formGroup]="form">
     <div formArrayName="inputs">
       <div *ngFor="let input of inputs.controls; let i = index" [formGroupName]="i">
         <input type="text" formControlName="value" placeholder="Entrez du texte" />
@@ -27,12 +27,12 @@
       </div>
     </div>
     <button type="button" (click)="addInput()">Ajouter un champ</button>
-  </form>
+  </form> -->
   
-  <div>
+  <!-- <div>
     <h4>Texte actuel :</h4>
     <div *ngFor="let input of inputs.controls">
       {{ input.value.value }}
     </div>
-  </div>
+  </div> -->
   

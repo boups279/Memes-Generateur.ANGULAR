@@ -1,6 +1,10 @@
 <div class="container">
     <h2>Ajouter un Mème</h2>
-    <form (ngSubmit)="addMeme()">
+    <div class="form-group">
+        <label for="name">URL :</label>
+        <input type="text" id="name" [(ngModel)]="url" name="name" required class="form-control" />
+    </div>
+    <!-- <form (ngSubmit)="addMeme()">
         <div class="form-group">
             <label for="name">Titre :</label>
             <input type="text" id="name" [(ngModel)]="name" name="name" required class="form-control" />
@@ -11,8 +15,29 @@
                 class="form-control" />
         </div>
         <button type="submit" class="btn btn-primary">Ajouter Mème</button>
+    </form> -->
+
+    <!-- add-meme.component.html -->
+    <form (ngSubmit)="onSubmit()" #memeForm="ngForm" enctype="multipart/form-data">
+        <div>
+            <label for="name">Nom du mème :</label>
+            <input type="text" id="name" name="name" [(ngModel)]="meme.name" required />
+        </div>
+
+        <div>
+            <label for="image">Télécharger une image :</label>
+            <input type="file" id="image" name="image" (change)="onFileSelected($event)" accept="image/*" required />
+        </div>
+
+        <button type="submit" [disabled]="!memeForm.form.valid">Ajouter un mème</button>
     </form>
-    <div *ngIf="message" class="alert alert-info mt-3">
-        {{ message }}
+
+
+    <div class="url_img">
+        <img src="{{url}}" alt="">
     </div>
+
+    <!-- <div *ngIf="message" class="alert alert-info mt-3">
+        {{ message }}
+    </div> -->
 </div>
