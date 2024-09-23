@@ -1,45 +1,24 @@
-<div class="example-boundary" #captureDiv>
-    <img class=" meme_image rounded-start" [src]="this.authService.selected_memes"
-        alt="memes"  />
-    <!-- <img class=" meme_image rounded-start" src="memes3.png" alt="memes"  /> -->
+<div class="example-boundary" id="screen-content">
+  <ng-container *ngIf="authService.selected_memes  != '' ">
+    <img class="meme_image rounded-start" *ngIf="authService.selected_memes" [src]="authService.selected_memes"
+      alt="memes">
+  </ng-container>
+  <ng-container *ngIf="authService.selected_memes  == '' ">
+    <img class="meme_image rounded-start" *ngIf="authService.imageBase64" [src]="authService.imageBase64" alt="memes">
+  </ng-container>
+
+  <div *ngFor="let field of authService.les_texts; let i = index">
     <div class="example-box" cdkDragBoundary=".example-boundary" cdkDrag>
-       <p [ngStyle]="{'font-style': authService.isItalic ? 'italic' : 'normal', 
-       'font-weight': authService.isBold ? 'bold' : 'normal', 
-       'color': authService.textColor, 
-       'font-size': authService.fontSize + 'px'}">{{this.authService.le_texte}}</p>
+      <p class="p-0" [ngStyle]="{
+          'font-style': authService.fieldStyles[i]?.isItalic ? 'italic' : 'normal',
+          'font-weight': authService.fieldStyles[i]?.isBold ? 'bold' : 'normal',
+          'color': authService.fieldStyles[i]?.color || '#000',
+          'font-size': (authService.fieldStyles[i]?.fontSize || 16) + 'px',
+          'transform': 'rotate(' + (authService.fieldStyles[i]?.rotation || 0) + 'deg)',
+          'text-transform': field.value.toUpperCase() === field.value ? 'uppercase' : 'lowercase'
+        }">
+        {{ field.value }}
+      </p>
     </div>
+  </div>
 </div>
-<button (click)="capture()">Prendre une capture d'écran v3</button>
-
-
-
-<!-- <button (click)="takeScreenshot()">Prendre une capture d'écran</button> -->
-
-
-<!-- <button (click)="toggleItalic()">Italique</button>
-<button (click)="toggleBold()">Gras</button>
-<button (click)="increaseFontSize()">Augmenter taille</button>
-<button (click)="decreaseFontSize()">Diminuer taille</button>
-<div>
-    <h4>Sélectionnez une couleur :</h4>
-    <input type="color" [(ngModel)]="textColor" (input)="onColorChange($event)">
-  </div> -->
-
-
-  <!-- <form [formGroup]="form">
-    <div formArrayName="inputs">
-      <div *ngFor="let input of inputs.controls; let i = index" [formGroupName]="i">
-        <input type="text" formControlName="value" placeholder="Entrez du texte" />
-        <button (click)="removeInput(i)">Supprimer</button>
-      </div>
-    </div>
-    <button type="button" (click)="addInput()">Ajouter un champ</button>
-  </form> -->
-  
-  <!-- <div>
-    <h4>Texte actuel :</h4>
-    <div *ngFor="let input of inputs.controls">
-      {{ input.value.value }}
-    </div>
-  </div> -->
-  

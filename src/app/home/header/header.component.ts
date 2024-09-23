@@ -16,7 +16,6 @@ import { ImgMemesComponent } from '../memes/img-memes/img-memes.component';
 import { GenererComponent } from '../memes/generer/generer.component';
 import html2canvas from 'html2canvas';
 
-
 @Component({
   selector: 'app-header',
   standalone: true,
@@ -28,10 +27,10 @@ import html2canvas from 'html2canvas';
     MonMemesComponent,
     CommonModule,
     ImgMemesComponent,
-    GenererComponent
+    GenererComponent,
   ],
   templateUrl: './header.component.html',
-  styleUrl: './header.component.scss',
+  styleUrls: ['./header.component.scss'],
 })
 export class HeaderComponent {
   radioForm!: FormGroup;
@@ -42,133 +41,114 @@ export class HeaderComponent {
   @ViewChild('elementToCaptureverso') elementToCaptureverso: any;
 
   constructor(private fb: FormBuilder, public authService: AuthService) {
-    // this.form = this.fb.group({
-    //   inputs: this.fb.array([]),
-    // });
-
-    // console.log(this.form);
-
     this.form = this.fb.group({
-      inputs: this.fb.array([this.createInput()]),
+      fields: this.fb.array([]),
     });
   }
 
   ngOnInit(): void {
-    this.selectedOption = 'mon';
-    // Initialisation du formulaire
+    this.selectedOption = 'populaire';
     this.radioForm = this.fb.group({
-      option: ['mon'], // Valeur par défaut
+      option: ['populaire'],
     });
 
-    // Écouter les changements de valeur
     this.radioForm.get('option')?.valueChanges.subscribe((value) => {
       this.selectedOption = value;
     });
-  }
 
-  get inputs(): FormArray {
-    const texte = this.form.get('inputs') as FormArray;
-    this.authService.le_texte = texte.value[0];
-    this.authService.le_texte = texte?.value[0]?.value;
-    console.log(this.authService.le_texte);
-    return this.form.get('inputs') as FormArray;
-  }
-
-  createInput(): FormGroup {
-    return this.fb.group({
-      value: [''],
+    this.form.valueChanges.subscribe(() => {
+      this.updateFieldData();
     });
   }
 
-  addInput(): void {
-    this.inputs.push(this.createInput());
+  fieldData: { index: number; value: string }[] = [];
+
+  get fields(): FormArray {
+    return this.form.get('fields') as FormArray;
   }
 
-  removeInput(index: number): void {
-    this.inputs.removeAt(index);
+  addField() {
+    const field = this.fb.control('', Validators.required);
+    this.fields.push(field);
+    this.updateFieldData();
   }
 
-  // get inputs(): FormArray {
-  //   const texte = this.form.get('inputs') as FormArray
-  //   // this.authService.le_texte = texte.value[0];
-  //   this.authService.le_texte = texte?.value[0]?.value;
-  //   console.log(this.authService.le_texte);
-  //   return this.form.get('inputs') as FormArray;
-  // }
-
-  // addInput(): void {
-  //   const inputGroup = this.fb.group({
-  //     value: ['', Validators.required] // Ajout d'un champ 'value'
-  //   });
-  //   this.inputs.push(inputGroup); // Ajout d'un nouvel input
-  // }
-
-  // removeInput(index: number): void {
-  //   this.inputs.removeAt(index); // Supprimer l'input à l'index donné
-  // }
-
-  toggleItalic() {
-    this.authService.isItalic = !this.authService.isItalic;
+  removeField(index: number) {
+    this.fields.removeAt(index);
+    this.updateFieldData();
   }
 
-  toggleBold() {
-    this.authService.isBold = !this.authService.isBold;
+  updateFieldData() {
+    this.fieldData = this.fields.controls.map((control, index) => ({
+      index: index + 1,
+      value: control.value,
+    }));
+
+    this.authService.les_texts = this.fieldData;
+    console.log('this.authService.les_texts', this.authService.les_texts);
   }
 
-  increaseFontSize() {
-    this.authService.fontSize += 2;
+  onSubmit() {
+    console.log(this.form.value);
   }
 
-  decreaseFontSize() {
-    if (this.authService.fontSize > 8) {
-      this.authService.fontSize -= 2;
+  toggleItalic(index: number) {
+    this.authService.fieldStyles[index] = {
+      ...this.authService.fieldStyles[index],
+      isItalic: !this.authService.fieldStyles[index]?.isItalic,
+    };
+  }
+
+  toggleBold(index: number) {
+    this.authService.fieldStyles[index] = {
+      ...this.authService.fieldStyles[index],
+      isBold: !this.authService.fieldStyles[index]?.isBold,
+    };
+  }
+
+  increaseFontSize(index: number) {
+    this.authService.fieldStyles[index] = {
+      ...this.authService.fieldStyles[index],
+      fontSize: (this.authService.fieldStyles[index]?.fontSize || 16) + 2,
+    };
+  }
+
+  decreaseFontSize(index: number) {
+    if (this.authService.fieldStyles[index]?.fontSize > 8) {
+      this.authService.fieldStyles[index].fontSize -= 2;
     }
   }
 
-  onColorChange(event: Event) {
+  onColorChange(event: Event, index: number) {
     const input = event.target as HTMLInputElement;
-    this.authService.textColor = input.value;
+    this.authService.fieldStyles[index] = {
+      ...this.authService.fieldStyles[index],
+      color: input.value,
+    };
   }
 
-  setUppercase() {
-    this.authService.textTransform = 'uppercase';
+  setRotateLeft(index: number) {
+    this.authService.fieldStyles[index] = {
+      ...this.authService.fieldStyles[index],
+      rotation: (this.authService.fieldStyles[index]?.rotation || 0) - 15,
+    };
   }
 
-  setLowercase() {
-    this.authService.textTransform = 'lowercase';
+  setRotateRight(index: number) {
+    this.authService.fieldStyles[index] = {
+      ...this.authService.fieldStyles[index],
+      rotation: (this.authService.fieldStyles[index]?.rotation || 0) + 15,
+    };
   }
 
-  resetTransform() {
-    this.authService.textTransform = 'none';
+  toggleCase(index: number) {
+    const control = this.fields.at(index);
+    const currentValue = control.value;
+    const newValue =
+      currentValue.toUpperCase() === currentValue
+        ? currentValue.toLowerCase()
+        : currentValue.toUpperCase();
+    control.setValue(newValue);
+    this.updateFieldData();
   }
-
-
-
-
-
-
-  takeScreenshot() {
-    const element = this.elementToCapturerecto.nativeElement;
-    html2canvas(element).then((canvas: any) => {
-      const screenshot = canvas.toDataURL('image/png');
-      const a = document.createElement('a');
-      a.href = screenshot;
-      a.download = 'this.content.prenom' + '_qrcode.png';
-      document.body.appendChild(a);
-      a.click();
-      document.body.removeChild(a);
-    });
-
-    const element2 = this.elementToCaptureverso.nativeElement;
-    html2canvas(element2).then((canvas: any) => {
-      const screenshot = canvas.toDataURL('image/png');
-      const a = document.createElement('a');
-      a.href = screenshot;
-      a.download = 'this.content.prenom' + '_qrcode.png';
-      document.body.appendChild(a);
-      a.click();
-      document.body.removeChild(a);
-    });
-  }
-
 }

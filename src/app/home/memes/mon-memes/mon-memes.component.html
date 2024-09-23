@@ -1,1 +1,10 @@
-    <p>Aucun mème trouvé.</p>
+<div *ngIf="captures && captures.length > 0; else noCaptures" class="les_memes">
+    <div *ngFor="let capture of captures" class="package" (click)="loadImageFromUrl(capture.image)">
+        <div class="package2">
+            <img [src]="'http://127.0.0.1:8000/storage/'+capture.image" alt="Capture" class="meme-image" />
+        </div>
+    </div>
+</div>
+<ng-template #noCaptures>
+    <p>Aucun meme créer.</p>
+</ng-template>

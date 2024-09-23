@@ -1,0 +1,64 @@
+.les_memes{
+    display: flex;
+    margin-left: 15px;
+  }
+    .package {
+      width: 100px;
+      height: 100px;
+      margin-left: 10px;
+      background-image: linear-gradient(163deg, #ff00ff 0%, #3700ff 100%);
+      border-radius: 20px;
+      text-align: center;
+      transition: all 0.25s cubic-bezier(0, 0, 0, 1);
+    }
+    
+    .package:hover {
+      box-shadow: 0px 0px 30px 1px rgba(204, 0, 255, 0.3);
+    }
+    
+    .package2 {
+      width: 100px;
+      height: 100px;
+      background-color: #1d1724;
+      border-radius: 10px;
+      transition: all 0.25s cubic-bezier(0, 0, 0, 1);
+      padding: 5px;
+      cursor: pointer;
+  
+          img{
+              height: 100%;
+              width: 100%;
+              border-radius: 5px;
+          }
+    }
+    
+    .package2:hover {
+      transform: scale(0.98);
+      border-radius: 18px;
+    }
+    
+    .text {
+      color: white;
+      font-size: 17px;
+    }
+    
+  
+  
+  
+    .container {
+      position: relative;
+    }
+    
+    .drag-box {
+      position: absolute;
+    }
+    
+    .draggable-text {
+      position: absolute;
+      cursor: move; /* Changer le curseur en main pour indiquer le mouvement */
+      color: white; /* Couleur du texte */
+      background: rgba(0, 0, 0, 0.5); /* Fond semi-transparent */
+      padding: 5px;
+      border-radius: 4px;
+    }
+    

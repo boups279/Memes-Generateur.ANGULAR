@@ -1,7 +1,7 @@
-<div *ngIf="memes && memes.length > 0; else noMemes" class="les_memes">
-    <div *ngFor="let meme of memes" class="package" (click)="selectedMemes(meme.image_url)">
+<div *ngIf="img_populaire && img_populaire.length > 0; else noMemes" class="les_memes">
+    <div *ngFor="let meme of img_populaire" class="package" (click)="loadImageFromUrl(meme.images)">
         <div class="package2">
-            <img [src]="'http://127.0.0.1:8000'+meme.image_url" alt="{{ meme.name }}" class="meme-image" />
+            <img [src]="meme.images" alt="Meme" class="meme-image" />
         </div>
     </div>
 </div>

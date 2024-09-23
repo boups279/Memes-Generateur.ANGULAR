@@ -1,205 +1,9 @@
-
-<div class="row justify-content-center p-5">
-    <div class="card col-md-12 mb-3" style="max-width: 1340px;">
-        <div class="row g-0">
-            <div class="col-md-6">
-                <app-img-memes></app-img-memes>
-             
-                
-            </div>
-            <div class="col-md-6">
-                <div class="card-body">
-                    <!-- <h5 class="card-title">Card title</h5> -->
-
-
-                    <div class="d-flex add_image">
-                        <button class="btn btn-outline-success" data-bs-target="#exampleModalToggle"
-                            data-bs-toggle="modal">Telecharger un nouveau modèle</button>
-
-                        <div class="ms-5">
-                            <form class="d-flex" role="search">
-                                <input class="form-control me-2" type="search" placeholder="Rechercher tous les mèmes"
-                                    aria-label="Search">
-                            </form>
-                        </div>
-                    </div>
-                    <div class="d-flex justify-content-end">
-                        <form [formGroup]="radioForm">
-                            <div class="radio-inputs">
-                                <label class="radio">
-                                    <input type="radio" formControlName="option" value="mon">
-                                    <span class="name">Mon</span>
-                                </label>
-                                <label class="radio">
-                                    <input type="radio" formControlName="option" value="populaire">
-                                    <span class="name">Populaire</span>
-                                </label>
-                            </div>
-                        </form>
-
-
-                        <!-- <div class="radio-inputs">
-                            <label class="radio">
-                                <input type="radio" name="radio" checked="">
-                                <span class="name">Mon</span>
-                            </label>
-                            <label class="radio">
-                                <input type="radio" name="radio">
-                                <span class="name">Populaire</span>
-                            </label>
-                        </div> -->
-                    </div>
-
-
-                    <!-- Les Cardes des Memes -->
-                    <div class="les_cardes">
-                        <div *ngIf="selectedOption === 'populaire'">
-                            <app-popular-mimes></app-popular-mimes>
-                        </div>
-                        <div *ngIf="selectedOption === 'mon'">
-                            <app-mon-memes></app-mon-memes>
-                        </div>
-                    </div>
-
-                    <!-- <form [formGroup]="form">
-                        <div formArrayName="inputs">
-                            <div *ngFor="let input of inputs.controls; let i = index" [formGroupName]="i">
-                                <input type="text" formControlName="value" placeholder="Entrez du texte" />
-                                <button (click)="removeInput(i)">Supprimer</button>
-                            </div>
-                        </div>
-                        <button type="button" (click)="addInput()">Ajouter un champ</button>
-                    </form> -->
-
-                    <form class="mt-4" [formGroup]="form">
-                        <div formArrayName="inputs">
-                            <div class="mb-3 d-flex" *ngFor="let input of inputs.controls; let i = index"
-                                [formGroupName]="i">
-                                <div class="col-10">
-                                    <input type="email" formControlName="value" placeholder="Texte {{i+1}}" class="form-control"
-                                        id="exampleInputEmail1" aria-describedby="emailHelp">
-
-                                </div>
-                                <div class="col-1 ms-2">
-                                    <button (click)="removeInput(i)" class="btn btn-outline-danger" type="submit"><svg
-                                            xmlns="http://www.w3.org/2000/svg" width="16" height="16"
-                                            fill="currentColor" class="bi bi-trash-fill" viewBox="0 0 16 16">
-                                            <path
-                                                d="M2.5 1a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1H3v9a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V4h.5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1zm3 4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5M8 5a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7A.5.5 0 0 1 8 5m3 .5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 1 0" />
-                                        </svg>
-                                    </button>
-                                </div>
-                            </div>
-                            <p class="d-inline-flex gap-1">
-                                <!-- Italique -->
-                                <button (click)="toggleItalic()" class="btn" data-bs-toggle="button"><svg
-                                        xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="currentColor"
-                                        class="bi bi-type-italic" viewBox="0 0 16 16">
-                                        <path
-                                            d="M7.991 11.674 9.53 4.455c.123-.595.246-.71 1.347-.807l.11-.52H7.211l-.11.52c1.06.096 1.128.212 1.005.807L6.57 11.674c-.123.595-.246.71-1.346.806l-.11.52h3.774l.11-.52c-1.06-.095-1.129-.211-1.006-.806z" />
-                                    </svg>
-                                </button>
-                                <!-- Gras -->
-                                <button (click)="toggleBold()" type="button" class="btn" data-bs-toggle="button">
-                                    <svg width="22" height="22" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32"
-                                        id="text">
-                                        <path
-                                            d="M6 24h20v6H6zm6.4-6h7.2l1.4 4h4L18 2h-4L7 22h4l1.4-4zM16 7.714 18.2 14h-4.4L16 7.714z">
-                                        </path>
-                                    </svg>
-                                </button>
-
-                                <button type="button" class="btn" data-bs-toggle="button">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 16 16"
-                                        id="Text">
-                                        <path fill="#422e18"
-                                            d="M12.5 4.9c-1.4 0-2.5.8-2.6.9l1.2 1.6s.7-.5 1.4-.5c1.4 0 1.5 1.2 1.5 1.6-.4-.1-1.1-.3-2-.1-1.4.3-2.8 2-2.1 3.9.7 1.8 3.1 2.1 4.1.6v1h2V8.6c0-2.7-1.9-3.7-3.5-3.7zm-1 6.5C11.4 9.5 13 9.5 14 9.6v1c0 1.2-2.3 2.3-2.5.8zM6.9 14H9L5.8 2H3.1L0 14h2.1l1-4h2.7l1.1 4zM3.6 8l.8-3.2.9 3.2H3.6z"
-                                            class="color444444 svgShape"></path>
-                                    </svg>
-                                </button>
-                             
-                                <!-- Augmenter taille -->
-                                <button (click)="increaseFontSize()" type="button" class="btn btn-outline-info">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 16 16"
-                                        id="Plus">
-                                        <g fill="none" fill-rule="evenodd" stroke="#000000" stroke-linecap="round"
-                                            stroke-linejoin="round" stroke-width="2"
-                                            class="colorStroke000000 svgStroke">
-                                            <path d="M8 1v14M1 8h14" fill="#422e18" class="color000000 svgShape"></path>
-                                        </g>
-                                    </svg>
-                                </button>
-                                <!-- Diminuer taille -->
-                                <button (click)="decreaseFontSize()" type="button" class="btn btn-outline-info">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 64 64"
-                                        id="Remove">
-                                        <line x2="64" y1="32" y2="32" fill="none" stroke="#422e18"
-                                            stroke-miterlimit="10" stroke-width="4" class="colorStroke010101 svgStroke">
-                                        </line>
-                                    </svg>
-
-                                </button>
-                                <button type="button" class="btn btn-outline-danger">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 8 8"
-                                        id="Reload">
-                                        <path
-                                            d="M4 0C1.8 0 0 1.8 0 4s1.8 4 4 4c1.1 0 2.12-.43 2.84-1.16l-.72-.72c-.54.54-1.29.88-2.13.88-1.66 0-3-1.34-3-3s1.34-3 3-3c.83 0 1.55.36 2.09.91L4.99 3h3V0L6.8 1.19C6.08.47 5.09 0 3.99 0z"
-                                            fill="#422e18" class="color000000 svgShape"></path>
-                                    </svg>
-
-                                </button>
-
-                                <input type="color" (change)="onColorChange($event)" value="{{authService.textColor}}" />
-
-                            </p>
-
-                            <div>
-                                <h4>Options de texte :</h4>
-                                <!-- <button >Italique</button> -->
-                                <!-- <button (click)="toggleBold()">Gras</button> -->
-                                <!-- <button (click)="increaseFontSize()">Augmenter taille</button> -->
-                                <!-- <button (click)="decreaseFontSize()">Diminuer taille</button> -->
-                                <button (click)="setUppercase()">Majuscule</button>
-                                <button (click)="setLowercase()">Minuscule</button>
-                                <button (click)="resetTransform()">Réinitialiser</button>
-                            </div>
-
-
-                        </div>
-                        <div class="d-grid gap-2 col-11">
-                            <button (click)="addInput()" class="btn btn-outline-success" type="button">Ajouter
-                                texte</button>
-                        </div>
-                    </form>
-
-
-                    <button class="animated-button mt-5" data-bs-target="#exampleModalToggle2"
-                    data-bs-toggle="modal">
-                        <svg viewBox="0 0 24 24" class="arr-2" xmlns="http://www.w3.org/2000/svg">
-                            <path
-                                d="M16.1716 10.9999L10.8076 5.63589L12.2218 4.22168L20 11.9999L12.2218 19.778L10.8076 18.3638L16.1716 12.9999H4V10.9999H16.1716Z">
-                            </path>
-                        </svg>
-                        <span class="text">Gènèrer le meme</span>
-                        <span class="circle"></span>
-                        <svg viewBox="0 0 24 24" class="arr-1" xmlns="http://www.w3.org/2000/svg">
-                            <path
-                                d="M16.1716 10.9999L10.8076 5.63589L12.2218 4.22168L20 11.9999L12.2218 19.778L10.8076 18.3638L16.1716 12.9999H4V10.9999H16.1716Z">
-                            </path>
-                        </svg>
-                    </button>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-
 <div class="modal fade" id="exampleModalToggle" aria-hidden="true" aria-labelledby="exampleModalToggleLabel"
     tabindex="-1">
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
             <div class="modal-header">
-                <h1 class="modal-title fs-5" id="exampleModalToggleLabel">Ajouter un Mème</h1>
+                <!-- <h1 class="modal-title fs-5" id="exampleModalToggleLabel">Ajouter un Mème</h1> -->
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
@@ -230,4 +34,197 @@
             </div>
         </div>
     </div>
+</div>
+
+
+<div class="container_blue"></div>
+<div class="container_center">
+    <div class="form col-sm-8">
+        <div class="row g-0">
+            <div class="col-md-5">
+                <app-img-memes></app-img-memes>
+            </div>
+            <div class="col-md-6 ms-5">
+                <div class="card-body">
+                    <!-- <h5 class="card-title">Card title</h5> -->
+
+
+                    <div class="d-flex add_image" style="display: flex; justify-content: space-between;">
+                        <button class="btn btn-outline-success" data-bs-target="#exampleModalToggle"
+                            data-bs-toggle="modal"><svg xmlns="http://www.w3.org/2000/svg" width="48" height="48"
+                                id="camera">
+                                <path fill="none" d="M0 0h48v48H0z"></path>
+                                <path
+                                    d="m18.8 21 9.53-16.51C26.94 4.18 25.49 4 24 4c-4.8 0-9.19 1.69-12.64 4.51l7.33 12.69.11-.2zm24.28-3c-1.84-5.85-6.3-10.52-11.99-12.68L23.77 18h19.31zm.52 2H28.62l.58 1 9.53 16.5C41.99 33.94 44 29.21 44 24c0-1.37-.14-2.71-.4-4zm-26.53 4-7.8-13.5C6.01 14.06 4 18.79 4 24c0 1.37.14 2.71.4 4h14.98l-2.31-4zM4.92 30c1.84 5.85 6.3 10.52 11.99 12.68L24.23 30H4.92zm22.54 0-7.8 13.51c1.4.31 2.85.49 4.34.49 4.8 0 9.19-1.69 12.64-4.51L29.31 26.8 27.46 30z">
+                                </path>
+                            </svg>
+                            Telecharger un nouveau modèle</button>
+
+                        <div class="ms-5">
+                            <button class="btn btn-secondary">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 8 8"
+                                    id="share">
+                                    <path d="M5 0v2C1 2 0 4.05 0 7c.52-1.98 2-3 4-3h1v2l3-3.16L5 0z"></path>
+                                </svg>
+
+                            </button>
+                        </div>
+                    </div>
+                    <div class="d-flex justify-content-end">
+                        <form [formGroup]="radioForm">
+                            <div class="radio-inputs">
+                                <label class="radio">
+                                    <input type="radio" formControlName="option" value="mon">
+                                    <span class="name">Mes</span>
+                                </label>
+                                <label class="radio">
+                                    <input type="radio" formControlName="option" value="populaire">
+                                    <span class="name">Populaires</span>
+                                </label>
+                            </div>
+                        </form>
+                    </div>
+
+
+                    <!-- Les Cardes des Memes -->
+                    <div class="les_cardes">
+                        <div *ngIf="selectedOption === 'populaire'">
+                            <app-popular-mimes></app-popular-mimes>
+                        </div>
+                        <div *ngIf="selectedOption === 'mon'">
+                            <app-mon-memes></app-mon-memes>
+                        </div>
+                    </div>
+
+
+                    <form [formGroup]="form" (ngSubmit)="onSubmit()" class="mt-2">
+                        <div formArrayName="fields">
+                            <div *ngFor="let field of fields.controls; let i = index">
+                                <div class="d-flex">
+                                    <div class="col-10">
+                                        <input [formControlName]="i" placeholder="Texte {{ i + 1 }}"
+                                            class="form-control" style="background-color: rgb(231, 221, 221);">
+                                    </div>
+                                    <div class="col-1 ms-2">
+                                        <button (click)="removeField(i)" class="btn btn-outline-danger"
+                                            type="button">X</button>
+                                    </div>
+                                </div>
+                                <p class="d-inline-flex gap-1 mt-1">
+
+                                    <!-- Italique -->
+                                    <button (click)="toggleItalic(i)" type="button" class=" btn btn-sm"
+                                        data-bs-toggle="button">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22"
+                                            fill="currentColor" class="bi bi-type-italic" viewBox="0 0 16 16">
+                                            <path
+                                                d="M7.991 11.674 9.53 4.455c.123-.595.246-.71 1.347-.807l.11-.52H7.211l-.11.52c1.06.096 1.128.212 1.005.807L6.57 11.674c-.123.595-.246.71-1.346.806l-.11.52h3.774l.11-.52c-1.06-.095-1.129-.211-1.006-.806z" />
+                                        </svg>
+                                    </button>
+                                    <!-- Gras -->
+                                    <button (click)="toggleBold(i)" type="button" class=" btn" data-bs-toggle="button">
+                                        <svg width="22" height="22" xmlns="http://www.w3.org/2000/svg"
+                                            viewBox="0 0 32 32" id="text">
+                                            <path
+                                                d="M6 24h20v6H6zm6.4-6h7.2l1.4 4h4L18 2h-4L7 22h4l1.4-4zM16 7.714 18.2 14h-4.4L16 7.714z">
+                                            </path>
+                                        </svg>
+                                    </button>
+                                    <button (click)="toggleCase(i)" type="button" class="btn" data-bs-toggle="button">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22"
+                                            viewBox="0 0 16 16" id="Text">
+                                            <path fill="#422e18"
+                                                d="M12.5 4.9c-1.4 0-2.5.8-2.6.9l1.2 1.6s.7-.5 1.4-.5c1.4 0 1.5 1.2 1.5 1.6-.4-.1-1.1-.3-2-.1-1.4.3-2.8 2-2.1 3.9.7 1.8 3.1 2.1 4.1.6v1h2V8.6c0-2.7-1.9-3.7-3.5-3.7zm-1 6.5C11.4 9.5 13 9.5 14 9.6v1c0 1.2-2.3 2.3-2.5.8zM6.9 14H9L5.8 2H3.1L0 14h2.1l1-4h2.7l1.1 4zM3.6 8l.8-3.2.9 3.2H3.6z"
+                                                class="color444444 svgShape"></path>
+                                        </svg>
+                                    </button>
+                                    <!-- Augmenter taille -->
+                                    <button (click)="increaseFontSize(i)" type="button" class="btn btn-outline-info">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22"
+                                            viewBox="0 0 16 16" id="Plus">
+                                            <g fill="none" fill-rule="evenodd" stroke="#000000" stroke-linecap="round"
+                                                stroke-linejoin="round" stroke-width="2"
+                                                class="colorStroke000000 svgStroke">
+                                                <path d="M8 1v14M1 8h14" fill="#422e18" class="color000000 svgShape">
+                                                </path>
+                                            </g>
+                                        </svg>
+                                    </button>
+                                    <!-- Diminuer taille -->
+                                    <button (click)="decreaseFontSize(i)" type="button" class="btn btn-outline-info">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22"
+                                            viewBox="0 0 64 64" id="Remove">
+                                            <line x2="64" y1="32" y2="32" fill="none" stroke="#422e18"
+                                                stroke-miterlimit="10" stroke-width="4"
+                                                class="colorStroke010101 svgStroke">
+                                            </line>
+                                        </svg>
+
+                                    </button>
+                                    <button (click)="setRotateLeft(i)" type="button" class="btn btn-outline-info">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="22" height="20"
+                                            viewBox="0 0 22 20" id="rotate">
+                                            <g fill="none" fill-rule="evenodd" stroke-linecap="round"
+                                                stroke-linejoin="round">
+                                                <g stroke="#000" stroke-width="2" transform="translate(-1452 -1941)">
+                                                    <g transform="translate(1453 1942)">
+                                                        <path d="M0 1v6h6"></path>
+                                                        <path d="M2.51 12a9 9 0 1 0 2.13-9.36L0 7"></path>
+                                                    </g>
+                                                </g>
+                                            </g>
+                                        </svg>
+
+
+                                    </button>
+                                    <button (click)="setRotateRight(i)" type="button" class="btn btn-outline-info">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="22" height="20"
+                                            viewBox="0 0 22 20" id="rotate">
+                                            <g fill="none" fill-rule="evenodd" stroke-linecap="round"
+                                                stroke-linejoin="round">
+                                                <g stroke="#000" stroke-width="2" transform="translate(-1512 -1941)">
+                                                    <g transform="translate(1513 1942)">
+                                                        <path d="M20 1v6h-6"></path>
+                                                        <path d="M17.49 12a9 9 0 1 1-2.12-9.36L20 7"></path>
+                                                    </g>
+                                                </g>
+                                            </g>
+                                        </svg>
+                                    </button>
+
+
+                                    <input (change)="onColorChange($event, i)" type="color"
+                                        class="form-control form-control-color" id="exampleColorInput"
+                                        [value]="authService.fieldStyles[i]?.color || '#000000'"
+                                        title="Choose your color">
+                                </p>
+                            </div>
+                        </div>
+                        <div class="d-grid gap-2 col-11 mt-4">
+                            <button (click)="addField()" class="btn btn-outline-success" type="button">Ajouter
+                                texte</button>
+                        </div>
+                    </form>
+
+
+
+                    <button (click)="authService.captureScreen()" class="animated-button mt-5">
+                        <svg viewBox="0 0 24 24" class="arr-2" xmlns="http://www.w3.org/2000/svg">
+                            <path
+                                d="M16.1716 10.9999L10.8076 5.63589L12.2218 4.22168L20 11.9999L12.2218 19.778L10.8076 18.3638L16.1716 12.9999H4V10.9999H16.1716Z">
+                            </path>
+                        </svg>
+                        <span class="text">Telecharger le meme</span>
+                        <span class="circle"></span>
+                        <svg viewBox="0 0 24 24" class="arr-1" xmlns="http://www.w3.org/2000/svg">
+                            <path
+                                d="M16.1716 10.9999L10.8076 5.63589L12.2218 4.22168L20 11.9999L12.2218 19.778L10.8076 18.3638L16.1716 12.9999H4V10.9999H16.1716Z">
+                            </path>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
 </div>

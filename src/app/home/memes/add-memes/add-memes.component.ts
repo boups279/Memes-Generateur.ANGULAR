@@ -1,14 +1,14 @@
 import { Component, ElementRef, ViewChild } from '@angular/core';
 import { AuthService } from '../../../services/auth.service';
 import { Router, RouterModule } from '@angular/router';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({
   selector: 'app-add-memes',
   standalone: true,
-  imports: [RouterModule, FormsModule, CommonModule],
+  imports: [RouterModule, FormsModule, CommonModule, ReactiveFormsModule, RouterModule],
   templateUrl: './add-memes.component.html',
   styleUrls: ['./add-memes.component.scss']
 })
@@ -22,38 +22,48 @@ export class AddMemesComponent {
     image: null as File | null, // Fichier d'image, accepté comme File ou null
   };
 
-  constructor(private authService: AuthService) {}
+  constructor(public authService: AuthService) {
+    this.loadImageFromUrl(this.url);
+  }
 
-  // Méthode pour sélectionner le fichier
-  onFileSelected(event: any): void {
-    const file: File = event.target.files[0];
+
+
+  onFileSelected(event: Event) {
+    this.authService.selected_memes = '';
+    const file = (event.target as HTMLInputElement).files?.[0];
     if (file) {
-      this.meme.image = file;
-
-      // Créer une URL pour l'aperçu de l'image
       const reader = new FileReader();
-      reader.onload = (e: any) => {
-        this.imagePreview = e.target.result; // Stocke l'URL de l'image
+      reader.onload = () => {
+        this.authService.imageBase64 = reader.result as string;
       };
-      reader.readAsDataURL(file); // Lire le fichier et déclencher l'événement onload
+      reader.readAsDataURL(file);
     }
   }
 
-  checkConditionAndClose() {
-    const condition = true; // Remplacez ceci par votre condition réelle
 
-    if (condition) {
-      this.closeModal();
-    }
-  }
-
-  closeModal() {
-    const modalElement = this.modal.nativeElement;
-    // const modal = bootstrap.Modal.getInstance(modalElement); // Récupère l'instance du modal
-
-    // if (modal) {
-    //   modal.hide(); // Ferme le modal
-    // }
+  loadImageFromUrl(url: string) {
+    // url = 'https://i.pinimg.com/236x/85/42/1d/85421d99a96b40388c70eea6a1af2d1f.jpg';
+    this.authService.imageBase64 = '';
+    const img = new Image();
+    img.crossOrigin = 'Anonymous'; // Pour éviter les problèmes CORS
+  
+    img.onload = () => {
+      const canvas = document.createElement('canvas');
+      canvas.width = img.width;
+      canvas.height = img.height;
+      const ctx = canvas.getContext('2d');
+      if (ctx) {
+        ctx.drawImage(img, 0, 0);
+        this.authService.imageBase64 = canvas.toDataURL('image/png');
+        console.log('this.authService.imageBase64 =', this.authService.imageBase64)
+      }
+    };
+  
+    img.onerror = (error) => {
+      console.error('Erreur lors du chargement de l\'image :', error);
+    };
+  
+    img.src = url;
   }
 
   onSubmit(): void {
@@ -74,7 +84,7 @@ export class AddMemesComponent {
             if (response.imagePath) {
               this.authService.selected_memes = 'http://127.0.0.1:8000/storage/'+response.imagePath; // Ajustez en fonction de votre réponse
               console.log('Chemin de l\'image:', this.authService.selected_memes);
-              this.checkConditionAndClose();
+              // this.checkConditionAndClose();
             }
           },
           (error: HttpErrorResponse) => {

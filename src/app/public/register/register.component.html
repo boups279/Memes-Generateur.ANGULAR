@@ -22,4 +22,53 @@
     </div>
     <button type="submit">S'inscrire</button>
   </form>
-  
+
+
+
+<div class="container_blue"></div>
+<div class="container_center">
+  <div class="form col-sm-4">
+    <form (ngSubmit)="onSubmit()" #registerForm="ngForm">
+      <div class="img">
+        <img src="../assets/registration.png" alt="">
+      </div>
+      <div class="d-flex container_flex">
+        <div class="mb-6 col-sm-5">
+          <label for="exampleInputEmail1" class="form-label">Prenom</label>
+          <input id="prenom" [(ngModel)]="model.prenom" required type="text" name="prenom" class="form-control"
+            id="exampleInputEmail1" aria-describedby="emailHelp">
+        </div>
+        <div class="mb-6 col-sm-5">
+          <label for="exampleInputPassword1" class="form-label">Nom</label>
+          <input type="text" id="nom" [(ngModel)]="model.nom" name="nom" required class="form-control"
+            id="exampleInputPassword1">
+        </div>
+      </div>
+      <div class="d-flex container_flex">
+        <div class="mb-6 col-sm-5">
+          <label for="exampleInputEmail12" class="form-label">Email address</label>
+          <input type="email" id="email" [(ngModel)]="model.email" required type="email" class="form-control"
+              id="exampleInputEmail1" aria-describedby="emailHelp">
+        </div>
+        <div class="mb-6 col-sm-5">
+          <label for="exampleInputPassword12" class="form-label">Mot de passe</label>
+          <input type="password" id="password" [(ngModel)]="model.password" name="password" required
+              class="form-control" id="exampleInputPassword1">
+        </div>
+      </div>
+
+
+
+        <div class="flex items-start mb-3">
+          <label for="remember" class="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">Vous avez un compte
+            <a routerLink="/login" class="text-blue-600 hover:underline dark:text-blue-500">Se
+              Connecter</a>.</label>
+        </div>
+        <div class="button_login">
+          <button type="button"
+                    class="btn text-white btn_valide hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">S'inscrire</button>
+        </div>
+    </form>
+  </div>
+
+</div>
