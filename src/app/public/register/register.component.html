@@ -34,24 +34,24 @@
       </div>
       <div class="d-flex container_flex">
         <div class="mb-6 col-sm-5">
-          <label for="exampleInputEmail1" class="form-label">Prenom</label>
-          <input id="prenom" [(ngModel)]="model.prenom" required type="text" name="prenom" class="form-control"
-            id="exampleInputEmail1" aria-describedby="emailHelp">
+          <label for="prenom" class="form-label">Prenom</label>
+          <input [(ngModel)]="model.prenom" required type="text" name="prenom" class="form-control"
+            id="prenom" aria-describedby="emailHelp">
         </div>
         <div class="mb-6 col-sm-5">
-          <label for="exampleInputPassword1" class="form-label">Nom</label>
-          <input type="text" id="nom" [(ngModel)]="model.nom" name="nom" required class="form-control"
-            id="exampleInputPassword1">
+          <label for="nom" class="form-label">Nom</label>
+          <input type="text" [(ngModel)]="model.nom" name="nom" required class="form-control"
+            id="nom">
         </div>
       </div>
       <div class="d-flex container_flex">
         <div class="mb-6 col-sm-5">
-          <label for="exampleInputEmail12" class="form-label">Email address</label>
-          <input type="email" id="email" [(ngModel)]="model.email" required type="email" class="form-control"
+          <label for="email" class="form-label">Email</label>
+          <input type="email" [(ngModel)]="model.email" required type="email" name="email" class="form-control"
               id="exampleInputEmail1" aria-describedby="emailHelp">
         </div>
         <div class="mb-6 col-sm-5">
-          <label for="exampleInputPassword12" class="form-label">Mot de passe</label>
+          <label for="password" class="form-label">Mot de passe</label>
           <input type="password" id="password" [(ngModel)]="model.password" name="password" required
               class="form-control" id="exampleInputPassword1">
         </div>
