@@ -10,10 +10,11 @@ export class AuthService {
   private screenshotSubject = new BehaviorSubject<string | null>(null);
   screenshot$ = this.screenshotSubject.asObservable();
 
-  private apiUrl = 'http://127.0.0.1:8000/api/auth';
+  // private apiUrl = 'http://127.0.0.1:8000/api/auth';
+  private apiUrl = "https://laravel.meme-generator.boups.tech/api/auth";
+
   switch_memes = 'populaire';
-  selected_memes =
-    'http://127.0.0.1:8000/storage/memes/oJKjfNRcMiaU2CJQicUDogr9kdba6PvSLJpnPpw8.png';
+  selected_memes ='http://127.0.0.1:8000/storage/memes/oJKjfNRcMiaU2CJQicUDogr9kdba6PvSLJpnPpw8.png';
   le_texte: any;
 
   isItalic = false;
